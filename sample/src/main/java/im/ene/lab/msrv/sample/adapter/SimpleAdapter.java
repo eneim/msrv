@@ -22,14 +22,36 @@ import android.view.ViewGroup;
 import im.ene.lab.msrv.Adapter;
 import im.ene.lab.msrv.sample.data.SimpleItem;
 import im.ene.lab.msrv.sample.viewholder.SimpleViewHolder;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by eneim on 3/23/16.
  */
 public class SimpleAdapter extends Adapter<SimpleViewHolder> {
 
+  private static List<Integer> DATA = new ArrayList<>();
+
+  static {
+    for (int i = 0; i < 100; i++) {
+      DATA.add(i);
+    }
+  }
+
   @Override public Object getItem(int position) {
-    return new SimpleItem("Item number: " + position);
+    return new SimpleItem("Item number: " + DATA.get(position));
+  }
+
+  public void remove(int position) {
+    DATA.remove(position);
+    notifyItemRemoved(position);
+  }
+
+  public void remove(Integer... items) {
+    for (Integer item : items) {
+      DATA.remove(item);
+    }
+    notifyDataSetChanged();
   }
 
   @Override protected SimpleViewHolder onCreateViewHolderInternal(ViewGroup parent, int type) {
@@ -44,6 +66,6 @@ public class SimpleAdapter extends Adapter<SimpleViewHolder> {
    * @return The total number of items in this adapter.
    */
   @Override public int getItemCount() {
-    return 100;
+    return DATA.size();
   }
 }

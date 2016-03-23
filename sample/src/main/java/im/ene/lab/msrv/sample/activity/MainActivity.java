@@ -16,6 +16,7 @@
 
 package im.ene.lab.msrv.sample.activity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -68,10 +69,23 @@ public class MainActivity extends AppCompatActivity {
       return false;
     }
 
-    @Override public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+    @Override public boolean onActionItemClicked(final ActionMode mode, MenuItem item) {
       int itemId = item.getItemId();
       AlertDialog dialog = new AlertDialog.Builder(MainActivity.this).setMessage(
-          "Items: " + Arrays.toString(adapter.getSelectedItems().toArray())).create();
+          "Items: " + Arrays.toString(adapter.getSelectedItems().toArray()))
+          .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override public void onClick(DialogInterface dialog, int which) {
+              adapter.remove(
+                  adapter.getSelectedItems().toArray(new Integer[adapter.getSelectedItemCount()]));
+              mode.finish();
+            }
+          })
+          .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override public void onClick(DialogInterface dialog, int which) {
+
+            }
+          })
+          .create();
 
       switch (itemId) {
         case R.id.action_follow:
