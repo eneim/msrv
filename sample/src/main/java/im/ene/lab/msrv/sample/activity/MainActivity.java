@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
   SimpleAdapter adapter;
 
+  ActionMode actionMode;
+
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
   private ActionMode.Callback callback = new ActionMode.Callback() {
     @Override public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+      actionMode = mode;
       mode.getMenuInflater().inflate(R.menu.menu_main, menu);
       return true;
     }
@@ -76,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
     @Override public void onItemSelected(Adapter adapter, ViewHolder viewHolder, View view, int pos,
         long id) {
       Toast.makeText(MainActivity.this, "Selected: " + pos, Toast.LENGTH_SHORT).show();
+      if (actionMode != null) {
+        actionMode.setTitle(adapter.getSelectedItemCount() + " items");
+      }
     }
 
     @Override
