@@ -14,27 +14,24 @@
  * limitations under the License.
  */
 
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+package im.ene.lab.msrv.sample.activity;
 
-buildscript {
-  repositories {
-    jcenter()
-  }
-  dependencies {
-    classpath 'com.android.tools.build:gradle:2.1.0-alpha3'
-    classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'
-    // NOTE: Do not place your application dependencies here; they belong
-    // in the individual module build.gradle files
-  }
-}
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import im.ene.lab.msrv.sample.R;
 
-allprojects {
-  repositories {
-    jcenter()
-    maven { url "https://jitpack.io" }
-  }
-}
+/**
+ * Created by eneim on 3/23/16.
+ */
+public class DetailActivity extends AppCompatActivity {
 
-task clean(type: Delete) {
-  delete rootProject.buildDir
+  @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_detail);
+
+    if (getSupportActionBar() != null) {
+      getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+  }
 }
