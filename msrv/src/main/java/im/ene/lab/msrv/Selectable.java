@@ -14,26 +14,28 @@
  * limitations under the License.
  */
 
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+package im.ene.lab.msrv;
 
-buildscript {
-  repositories {
-    jcenter()
-  }
-  dependencies {
-    classpath 'com.android.tools.build:gradle:2.1.0-alpha3'
+import java.util.List;
 
-    // NOTE: Do not place your application dependencies here; they belong
-    // in the individual module build.gradle files
-  }
-}
+/**
+ * Created by eneim on 3/23/16.
+ */
+public interface Selectable {
 
-allprojects {
-  repositories {
-    jcenter()
-  }
-}
+  void toggleSelection(int pos);
 
-task clean(type: Delete) {
-  delete rootProject.buildDir
+  void clearSelections();
+
+  // void selectAll();
+
+  // void deselectAll();
+
+  boolean isItemSelected(int pos);
+
+  // void onActionItemClicked(ActionMode actionMode, MenuItem item);
+
+  int getSelectedItemCount();
+
+  List<Integer> getSelectedItems();
 }
