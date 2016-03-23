@@ -13,6 +13,7 @@ android {
     versionCode 1
     versionName "1.0"
   }
+
   buildTypes {
     release {
       minifyEnabled false
@@ -21,11 +22,15 @@ android {
   }
 }
 
+ext {
+  support_lib_version = '23.2.1'
+}
+
 dependencies {
   compile fileTree(dir: 'libs', include: ['*.jar'])
   testCompile 'junit:junit:4.12'
-  compile 'com.android.support:appcompat-v7:23.2.1'
-  compile 'com.android.support:recyclerview-v7:23.2.1'
+  compile "com.android.support:appcompat-v7:${support_lib_version}"
+  compile "com.android.support:recyclerview-v7:${support_lib_version}"
 }
 
 // build a jar with source files

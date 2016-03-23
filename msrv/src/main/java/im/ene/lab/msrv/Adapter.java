@@ -83,7 +83,7 @@ public abstract class Adapter<VH extends ViewHolder> extends RecyclerView.Adapte
           return false;
         }
 
-        if (!vh.isSelectable()) {
+        if (!vh.isSelectable() || itemSelectedListener == null) {
           return itemClickListener != null && //
               itemClickListener.onItemLongClick(Adapter.this, vh, v, pos, getItemId(pos));
         } else {
