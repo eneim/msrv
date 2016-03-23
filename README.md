@@ -7,14 +7,14 @@
 ### Setup
 
 ```guava
-  allprojects {
-		repositories {
-			...
-			maven { url "https://jitpack.io" }
-		}
+allprojects {
+	repositories {
+	// Other repos
+	maven { url "https://jitpack.io" }
 	}
+}
 	
-	dependencies {
-		compile 'com.github.User:Repo:Tag'
-	}
+dependencies {
+	compile 'com.github.eneim:msrv:1.0.1'
+}
 ```
