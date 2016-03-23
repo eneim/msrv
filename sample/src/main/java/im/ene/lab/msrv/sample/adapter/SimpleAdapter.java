@@ -29,7 +29,7 @@ import im.ene.lab.msrv.sample.viewholder.SimpleViewHolder;
 public class SimpleAdapter extends Adapter<SimpleViewHolder> {
 
   @Override public Object getItem(int position) {
-    return new SimpleItem("Item number: " + (position + 1));
+    return new SimpleItem("Item number: " + position);
   }
 
   @Override protected SimpleViewHolder onCreateViewHolderInternal(ViewGroup parent, int type) {
