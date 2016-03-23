@@ -23,13 +23,15 @@ import java.util.List;
  */
 public interface Selectable {
 
-  void toggleSelection(int pos);
+  void toggle(int pos);
 
   void clearSelections();
 
-  // void selectAll();
+  void selectAll();
 
-  // void deselectAll();
+  void selectNone();
+
+  boolean isSelectable(int pos);
 
   boolean isItemSelected(int pos);
 

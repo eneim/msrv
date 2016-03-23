@@ -43,10 +43,6 @@ public class SimpleViewHolder extends ViewHolder {
     }
   }
 
-  @Override public boolean isSelectable() {
-    return getAdapterPosition() % 4 != 0;
-  }
-
   @Override public void onSelectState(boolean activated) {
     Log.d(TAG, getAdapterPosition() + " | " + "isActivated = [" + activated + "]");
     itemView.setActivated(activated);

@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     recyclerView.addItemDecoration(
         new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
+    recyclerView.setItemAnimator(new DefaultItemAnimator());
     adapter = new SimpleAdapter();
     adapter.setItemClickListener(clickListener);
     adapter.setItemSelectedListener(selectedListener);
@@ -71,30 +73,50 @@ public class MainActivity extends AppCompatActivity {
 
     @Override public boolean onActionItemClicked(final ActionMode mode, MenuItem item) {
       int itemId = item.getItemId();
-      AlertDialog dialog = new AlertDialog.Builder(MainActivity.this).setMessage(
-          "Items: " + Arrays.toString(adapter.getSelectedItems().toArray()))
-          .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            @Override public void onClick(DialogInterface dialog, int which) {
-              adapter.remove(
-                  adapter.getSelectedItems().toArray(new Integer[adapter.getSelectedItemCount()]));
-              mode.finish();
-            }
-          })
-          .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override public void onClick(DialogInterface dialog, int which) {
-
-            }
-          })
-          .create();
-
       switch (itemId) {
         case R.id.action_follow:
-          dialog.setTitle("Follow these items?");
-          dialog.show();
+          new AlertDialog.Builder(MainActivity.this).setTitle("Follow these items?")
+              .setMessage("Items: " + Arrays.toString(adapter.getSelectedItems().toArray()))
+              .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override public void onClick(DialogInterface dialog, int which) {
+                  mode.finish();
+                }
+              })
+              .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                @Override public void onClick(DialogInterface dialog, int which) {
+
+                }
+              })
+              .create()
+              .show();
           return true;
         case R.id.action_delete:
-          dialog.setTitle("Delete these items?");
-          dialog.show();
+          new AlertDialog.Builder(MainActivity.this).setTitle("Delete these items?")
+              .setMessage("Items: " + Arrays.toString(adapter.getSelectedItems().toArray()))
+              .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override public void onClick(DialogInterface dialog, int which) {
+                  if (adapter.getSelectedItemCount() == 0) {
+
+                  } else if (adapter.getSelectedItemCount() == 1) {
+                    adapter.remove(adapter.getSelectedItems().get(0));
+                  } else {
+                    adapter.remove(adapter.getSelectedItems()
+                        .toArray(new Integer[adapter.getSelectedItemCount()]));
+                  }
+
+                  mode.finish();
+                }
+              })
+              .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                @Override public void onClick(DialogInterface dialog, int which) {
+
+                }
+              })
+              .create()
+              .show();
+          return true;
+        case R.id.action_settings:
+          adapter.selectAll();
           return true;
         default:
           return false;
@@ -102,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override public void onDestroyActionMode(ActionMode mode) {
+      actionMode = null;
       adapter.clearSelections();
     }
   };
