@@ -38,10 +38,6 @@ public abstract class ViewHolder extends RecyclerView.ViewHolder {
 
   public abstract void bind(Object item);
 
-  public boolean isSelectable() {
-    return false;
-  }
-
   private Boolean selectState = null;
 
   public final void onSelectStateChanged(boolean selectState) {

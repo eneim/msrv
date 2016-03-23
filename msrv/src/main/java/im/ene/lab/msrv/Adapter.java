@@ -63,6 +63,18 @@ public abstract class Adapter<VH extends ViewHolder> extends RecyclerView.Adapte
 
   public abstract Object getItem(int position);
 
+  public void clearSelection(int position) {
+    selectedItems.delete(position);
+    notifyItemChanged(position);
+  }
+
+  public void clearSelections(Integer... items) {
+    for (Integer item : items) {
+      selectedItems.delete(item);
+      notifyItemChanged(item);
+    }
+  }
+
   @Override public void onViewAttachedToWindow(VH holder) {
     super.onViewAttachedToWindow(holder);
     holder.onSelectStateChanged(selectedItems.get(holder.getAdapterPosition(), false));
@@ -83,12 +95,12 @@ public abstract class Adapter<VH extends ViewHolder> extends RecyclerView.Adapte
           return false;
         }
 
-        if (!vh.isSelectable() || itemSelectedListener == null) {
+        if (!isSelectable(pos) || itemSelectedListener == null) {
           return itemClickListener != null && //
               itemClickListener.onItemLongClick(Adapter.this, vh, v, pos, getItemId(pos));
         } else {
           if (isInSelectMode()) { // Is selecting, so continue selection
-            toggleSelection(pos);
+            toggle(pos);
             onSelection(vh, v, pos);
             return true;
           }
@@ -96,7 +108,7 @@ public abstract class Adapter<VH extends ViewHolder> extends RecyclerView.Adapte
           isInSelectMode = itemSelectedListener != null && //
               itemSelectedListener.onInitSelectMode(Adapter.this, vh, v, pos, getItemId(pos));
           if (isInSelectMode) { // select mode initialized, so toggle clicked item
-            toggleSelection(pos);
+            toggle(pos);
             onSelection(vh, v, pos);
           }
           return isInSelectMode;
@@ -111,8 +123,8 @@ public abstract class Adapter<VH extends ViewHolder> extends RecyclerView.Adapte
           return;
         }
 
-        if (isInSelectMode && vh.isSelectable()) { // In select mode, so do selection stuff
-          toggleSelection(pos);
+        if (isInSelectMode && isSelectable(pos)) { // In select mode, so do selection stuff
+          toggle(pos);
           onSelection(vh, v, pos);
         } else {  // Not int select mode, do normal stuff
           if (itemClickListener != null) {
@@ -141,7 +153,7 @@ public abstract class Adapter<VH extends ViewHolder> extends RecyclerView.Adapte
     return selectedItems.get(pos, false);
   }
 
-  @Override public void toggleSelection(int pos) {
+  @Override public void toggle(int pos) {
     if (selectedItems.get(pos, false)) {
       selectedItems.delete(pos);
     } else {
@@ -154,6 +166,28 @@ public abstract class Adapter<VH extends ViewHolder> extends RecyclerView.Adapte
     isInSelectMode = false;
     selectedItems.clear();
     notifyDataSetChanged();
+  }
+
+  @Override public void selectAll() {
+    for (int i = 0; i < getItemCount(); i++) {
+      if (isSelectable(i)) {
+        selectedItems.put(i, true);
+      }
+    }
+    notifyDataSetChanged();
+  }
+
+  @Override public void selectNone() {
+    for (int i = 0; i < getItemCount(); i++) {
+      if (isSelectable(i)) {
+        selectedItems.put(i, false);
+      }
+    }
+    notifyDataSetChanged();
+  }
+
+  @Override public boolean isSelectable(int pos) {
+    return false;
   }
 
   @Override public int getSelectedItemCount() {

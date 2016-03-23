@@ -43,11 +43,13 @@ public class SimpleAdapter extends Adapter<SimpleViewHolder> {
   }
 
   public void remove(int position) {
+    clearSelection(position);
     DATA.remove(position);
     notifyItemRemoved(position);
   }
 
   public void remove(Integer... items) {
+    clearSelections(items);
     for (Integer item : items) {
       DATA.remove(item);
     }
@@ -58,6 +60,10 @@ public class SimpleAdapter extends Adapter<SimpleViewHolder> {
     View view = LayoutInflater.from(parent.getContext())
         .inflate(SimpleViewHolder.LAYOUT_RES, parent, false);
     return new SimpleViewHolder(view);
+  }
+
+  @Override public boolean isSelectable(int pos) {
+    return pos % 4 != 0;
   }
 
   /**
