@@ -10,14 +10,30 @@
       android:theme="@style/AppTheme">
     <activity
         android:launchMode="singleTop"
-        android:name=".MainActivity"
+        android:name=".activity.MainActivity"
         android:theme="@style/SelectableListTheme">
+    </activity>
+
+    <activity
+        android:launchMode="singleTop"
+        android:name=".activity.SimpleFragmentActivity"
+        android:theme="@style/SelectableListTheme">
+    </activity>
+
+    <activity
+        android:launchMode="singleTop"
+        android:name=".activity.DetailActivity">
+    </activity>
+
+    <activity-alias
+        android:name="Launch"
+        android:targetActivity=".activity.SimpleFragmentActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
-    </activity>
+    </activity-alias>
   </application>
 
 </manifest>

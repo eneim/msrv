@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package im.ene.lab.msrv.sample;
+package im.ene.lab.msrv.sample.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +27,7 @@ import android.widget.Toast;
 import im.ene.lab.msrv.Adapter;
 import im.ene.lab.msrv.SelectableRecyclerView;
 import im.ene.lab.msrv.ViewHolder;
+import im.ene.lab.msrv.sample.R;
 import im.ene.lab.msrv.sample.adapter.SimpleAdapter;
 import im.ene.lab.msrv.sample.widget.DividerItemDecoration;
 
