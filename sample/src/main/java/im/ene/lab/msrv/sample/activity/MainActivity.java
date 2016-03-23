@@ -17,6 +17,7 @@
 package im.ene.lab.msrv.sample.activity;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,6 +31,7 @@ import im.ene.lab.msrv.ViewHolder;
 import im.ene.lab.msrv.sample.R;
 import im.ene.lab.msrv.sample.adapter.SimpleAdapter;
 import im.ene.lab.msrv.sample.widget.DividerItemDecoration;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -67,7 +69,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-      return false;
+      int itemId = item.getItemId();
+      AlertDialog dialog = new AlertDialog.Builder(MainActivity.this).setMessage(
+          "Items: " + Arrays.toString(adapter.getSelectedItems().toArray())).create();
+
+      switch (itemId) {
+        case R.id.action_follow:
+          dialog.setTitle("Follow these items?");
+          dialog.show();
+          return true;
+        case R.id.action_delete:
+          dialog.setTitle("Delete these items?");
+          dialog.show();
+          return true;
+        default:
+          return false;
+      }
     }
 
     @Override public void onDestroyActionMode(ActionMode mode) {
