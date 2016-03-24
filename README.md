@@ -4,7 +4,9 @@
 
 <img src="https://raw.githubusercontent.com/eneim/msrv/develop/art/web_hi_res_512.png" width="256">
 
-### Setup
+#### Setup
+
+Prepare the following lines to your build.gradle
 
 ```guava
 allprojects {
@@ -21,7 +23,7 @@ dependencies {
 
 ***msrv_latest*** could be found here: [![](https://jitpack.io/v/eneim/msrv.svg)](https://jitpack.io/#eneim/msrv)
 
-### LICENSE
+#### LICENSE
 
 Copyright $today.year eneim@Eneim Labs, nam@ene.im
 
