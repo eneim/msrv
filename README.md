@@ -16,6 +16,10 @@ allprojects {
 	}
 }
 	
+ext {
+  msrv_latest = '1.0.2' // TODO Always use the latest version from jitpack.io
+}
+
 dependencies {
 	compile "com.github.eneim:msrv:${msrv_latest}"
 }
