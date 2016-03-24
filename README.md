@@ -9,12 +9,14 @@
 ```guava
 allprojects {
 	repositories {
-	// Other repos
-	maven { url "https://jitpack.io" }
+		// Other repos
+		maven { url "https://jitpack.io" }
 	}
 }
 	
 dependencies {
-	compile 'com.github.eneim:msrv:1.0.1'
+	compile "com.github.eneim:msrv:${msrv_latest}"
 }
 ```
+
+***msrv_latest*** could be found here: [![](https://jitpack.io/v/eneim/msrv.svg)](https://jitpack.io/#eneim/msrv)
