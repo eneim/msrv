@@ -21,14 +21,11 @@ import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.util.SparseBooleanArray;
 
 /**
  * Created by eneim on 3/22/16.
  */
 public class SelectableRecyclerView extends RecyclerView {
-
-  private SparseBooleanArray mRestoredSelectState;
 
   public SelectableRecyclerView(Context context) {
     super(context);
@@ -52,23 +49,13 @@ public class SelectableRecyclerView extends RecyclerView {
     return state;
   }
 
-  @Override public void setAdapter(Adapter adapter) {
-    super.setAdapter(adapter);
-    if (adapter instanceof im.ene.lab.msrv.Adapter && mRestoredSelectState != null) {
-      ((im.ene.lab.msrv.Adapter) adapter).selectedItems = mRestoredSelectState.clone();
-    }
-
-    mRestoredSelectState = null;
-  }
-
   @Override protected void onRestoreInstanceState(Parcelable state) {
     im.ene.lab.msrv.Adapter.SavedState savedState = (im.ene.lab.msrv.Adapter.SavedState) state;
     super.onRestoreInstanceState(savedState.getSuperState());
 
     if (savedState.selectedItems != null) {
-      mRestoredSelectState = savedState.selectedItems;
       if (getAdapter() != null && getAdapter() instanceof im.ene.lab.msrv.Adapter) {
-        ((im.ene.lab.msrv.Adapter) getAdapter()).selectedItems = mRestoredSelectState;
+        ((im.ene.lab.msrv.Adapter) getAdapter()).selectedItems = savedState.selectedItems;
         requestLayout();
       }
     }
