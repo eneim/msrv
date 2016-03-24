@@ -16,6 +16,7 @@
 
 package im.ene.lab.msrv.sample.viewholder;
 
+import android.os.Build;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -45,7 +46,11 @@ public class SimpleViewHolder extends ViewHolder {
 
   @Override public void onSelectState(boolean activated) {
     Log.d(TAG, getAdapterPosition() + " | " + "isActivated = [" + activated + "]");
-    itemView.setActivated(activated);
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+      itemView.setSelected(activated);
+    } else {
+      itemView.setActivated(activated);
+    }
   }
 
   private static final String TAG = "SimpleViewHolder";

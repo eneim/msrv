@@ -17,13 +17,13 @@
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <item android:state_selected="false">
+  <item android:state_activated="false">
     <shape android:shape="rectangle">
       <solid android:color="@android:color/white"/>
     </shape>
   </item>
 
-  <item android:state_selected="true">
+  <item android:state_activated="true">
     <shape android:shape="rectangle">
       <solid android:color="#404776b0"/>
     </shape>
