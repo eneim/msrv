@@ -138,8 +138,9 @@ public abstract class Adapter<VH extends ViewHolder> extends RecyclerView.Adapte
   }
 
   private void onSelection(ViewHolder vh, View v, int pos) {
-    if (isItemSelected(pos) && itemSelectedListener != null) {
-      itemSelectedListener.onItemSelected(Adapter.this, vh, v, pos, getItemId(pos));
+    if (itemSelectedListener != null) {
+      itemSelectedListener.onItemSelected(Adapter.this, vh, v, pos, getItemId(pos),
+          isItemSelected(pos));
     }
   }
 
@@ -256,7 +257,8 @@ public abstract class Adapter<VH extends ViewHolder> extends RecyclerView.Adapte
    */
   public interface OnItemSelectedListener {
 
-    void onItemSelected(Adapter adapter, ViewHolder viewHolder, View view, int pos, long id);
+    void onItemSelected(Adapter adapter, ViewHolder viewHolder, View view, int pos, long id,
+        boolean selected);
 
     boolean onInitSelectMode(Adapter adapter, ViewHolder viewHolder, View view, int pos, long id);
   }
