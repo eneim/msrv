@@ -9,8 +9,8 @@
 ```guava
 allprojects {
 	repositories {
-	// Other repos
-	maven { url "https://jitpack.io" }
+		// Other repos
+		maven { url "https://jitpack.io" }
 	}
 }
 	
