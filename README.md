@@ -10,10 +10,10 @@ Prepare the following lines to your build.gradle
 
 ```guava
 allprojects {
-	repositories {
-		// Other repos
-		maven { url "https://jitpack.io" }
-	}
+  repositories {
+    // Other repos
+    maven { url "https://jitpack.io" }
+  }
 }
 	
 ext {
@@ -21,7 +21,7 @@ ext {
 }
 
 dependencies {
-	compile "com.github.eneim:msrv:${msrv_latest}"
+  compile "com.github.eneim:msrv:${msrv_latest}"
 }
 ```
 
