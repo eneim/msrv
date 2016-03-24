@@ -23,7 +23,7 @@ android {
 }
 
 ext {
-  support_lib_version = '23.2.1'
+  support_lib_version = '24.0.0-alpha1'
 }
 
 dependencies {
