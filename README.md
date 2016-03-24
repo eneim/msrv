@@ -15,7 +15,7 @@ allprojects {
 }
 	
 dependencies {
-	compile 'com.github.eneim:msrv:${msrv_latest}'
+	compile "com.github.eneim:msrv:${msrv_latest}"
 }
 ```
 
