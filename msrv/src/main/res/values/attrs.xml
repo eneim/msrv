@@ -18,10 +18,11 @@
 <resources>
 
   <declare-styleable name="SelectableRecyclerView">
-    <attr format="enum" name="selectMode">
+    <!-- prefix to prevent future conflict with framework -->
+    <attr format="enum" name="srv_selectMode">
       <enum name="none" value="0"/>
-      <enum name="single" value="1"/>
-      <enum name="multi" value="2"/>
+      <enum name="one" value="1"/>
+      <enum name="many" value="2"/>
     </attr>
 
     <attr format="reference" name="selector"/> <!-- Drawable -->
