@@ -17,7 +17,7 @@ allprojects {
 }
 	
 ext {
-  msrv_latest = '1.0.3' // TODO Always use the latest version from jitpack.io
+  msrv_latest = '1.1.1' // TODO Always use the latest version from jitpack.io
 }
 
 dependencies {
