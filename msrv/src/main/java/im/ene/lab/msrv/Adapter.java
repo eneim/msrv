@@ -84,7 +84,7 @@ public abstract class Adapter<VH extends ViewHolder> extends RecyclerView.Adapte
 
   @Override public final VH onCreateViewHolder(ViewGroup parent, int viewType) {
     final VH vh = onCreateViewHolderInternal(parent, viewType);
-    vh.setOnVHLongClickListener(new View.OnLongClickListener() {
+    vh.setOnViewLongClickListener(new View.OnLongClickListener() {
       @Override public boolean onLongClick(View v) {
         int pos = vh.getAdapterPosition();
         if (pos == RecyclerView.NO_POSITION) {
@@ -116,7 +116,7 @@ public abstract class Adapter<VH extends ViewHolder> extends RecyclerView.Adapte
       }
     });
 
-    vh.setOnVHClickListener(new View.OnClickListener() {
+    vh.setOnViewClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
         int pos = vh.getAdapterPosition();
         if (pos == RecyclerView.NO_POSITION) {

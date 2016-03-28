@@ -28,11 +28,11 @@ public abstract class ViewHolder extends RecyclerView.ViewHolder {
     super(itemView);
   }
 
-  public void setOnVHClickListener(View.OnClickListener listener) {
+  public void setOnViewClickListener(View.OnClickListener listener) {
     itemView.setOnClickListener(listener);
   }
 
-  public void setOnVHLongClickListener(View.OnLongClickListener listener) {
+  public void setOnViewLongClickListener(View.OnLongClickListener listener) {
     itemView.setOnLongClickListener(listener);
   }
 

@@ -15,17 +15,11 @@
   ~ limitations under the License.
   -->
 
-<resources>
-
-  <declare-styleable name="ErabiRecyclerView">
-    <!-- prefix to prevent future conflict with framework -->
-    <attr format="enum" name="erabi_mode">
-      <enum name="none" value="0"/>
-      <enum name="one" value="1"/>
-      <enum name="many" value="2"/>
-      <enum name="many_modal" value="3"/>
-    </attr>
-
-    <attr format="reference" name="erabi_drawable"/> <!-- Drawable -->
-  </declare-styleable>
-</resources>
+<im.ene.lab.msrv.ErabiRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/recycler_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:erabi_mode="many_modal"
+    >
+</im.ene.lab.msrv.ErabiRecyclerView>

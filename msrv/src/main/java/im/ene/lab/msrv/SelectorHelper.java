@@ -16,26 +16,19 @@
 
 package im.ene.lab.msrv;
 
-import java.util.List;
+import android.graphics.drawable.StateListDrawable;
+import android.support.v7.widget.RecyclerView;
+import android.widget.AbsListView;
+import java.util.Map;
+import java.util.WeakHashMap;
 
 /**
- * Created by eneim on 3/23/16.
+ * Created by eneim on 3/26/16.
  */
-public interface Selectable {
+public final class SelectorHelper {
 
-  void toggle(int pos);
+  private static final Map<ViewHolder, StateListDrawable> sCache = new WeakHashMap<>();
 
-  void clearSelections();
-
-  void selectAll();
-
-  void selectNone();
-
-  boolean isSelectable(int pos);
-
-  boolean isItemSelected(int pos);
-
-  int getSelectedItemCount();
-
-  List<Integer> getSelectedItems();
+  private AbsListView test;
+  private RecyclerView.ItemDecoration test3;
 }

@@ -16,24 +16,23 @@
 
 package im.ene.lab.msrv.sample.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-import im.ene.lab.msrv.Adapter;
-import im.ene.lab.msrv.SelectableRecyclerView;
+import im.ene.lab.msrv.ErabiAdapter;
+import im.ene.lab.msrv.ErabiRecyclerView;
 import im.ene.lab.msrv.ViewHolder;
 import im.ene.lab.msrv.sample.R;
-import im.ene.lab.msrv.sample.adapter.SimpleAdapter;
+import im.ene.lab.msrv.sample.adapter.SimpleErabiAdapter;
 import im.ene.lab.msrv.sample.widget.DividerItemDecoration;
 
 /**
@@ -56,81 +55,83 @@ public class SimpleFragmentActivity extends AppCompatActivity {
       return new SimpleFragment();
     }
 
-    SelectableRecyclerView recyclerView;
+    ErabiRecyclerView recyclerView;
 
-    SimpleAdapter adapter;
+    SimpleErabiAdapter adapter;
 
     @Nullable @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
         @Nullable Bundle savedInstanceState) {
-      return inflater.inflate(R.layout.activity_main, container, false);
+      return inflater.inflate(R.layout.fragment_main, container, false);
     }
 
     @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
-      recyclerView = (SelectableRecyclerView) view.findViewById(R.id.recycler_view);
+      recyclerView = (ErabiRecyclerView) view.findViewById(R.id.recycler_view);
       recyclerView.setLayoutManager(
           new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
       recyclerView.addItemDecoration(
           new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST));
     }
 
+    private static final String TAG = "SimpleFragment";
+
     @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
       super.onActivityCreated(savedInstanceState);
-      adapter = new SimpleAdapter();
-      adapter.setItemClickListener(clickListener);
-      adapter.setItemSelectedListener(selectedListener);
-      recyclerView.setAdapter(adapter);
-    }
-
-    private ActionMode.Callback callback = new ActionMode.Callback() {
-      @Override public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-        mode.getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-      }
-
-      @Override public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-        return false;
-      }
-
-      @Override public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-        return false;
-      }
-
-      @Override public void onDestroyActionMode(ActionMode mode) {
-        adapter.clearSelections();
-      }
-    };
-
-    private Adapter.OnItemSelectedListener selectedListener = new Adapter.OnItemSelectedListener() {
-      @Override
-      public void onItemSelected(Adapter adapter, ViewHolder viewHolder, View view, int pos,
-          long id) {
-        Toast.makeText(getContext(), "Selected: " + pos, Toast.LENGTH_SHORT).show();
-      }
-
-      @Override
-      public boolean onInitSelectMode(Adapter adapter, ViewHolder viewHolder, View view, int pos,
-          long id) {
-        if (getActivity() != null && getActivity() instanceof AppCompatActivity) {
-          ((AppCompatActivity) getActivity()).startSupportActionMode(callback);
+      adapter = new SimpleErabiAdapter();
+      recyclerView.setMultiChoiceModeListener(new ErabiAdapter.MultiChoiceModeListener() {
+        @Override public void onItemCheckedStateChanged(ActionMode mode, int position, long id,
+            boolean checked) {
+          Log.d(TAG, "onItemCheckedStateChanged() called with: "
+              + "mode = ["
+              + mode
+              + "], position = ["
+              + position
+              + "], id = ["
+              + id
+              + "], checked = ["
+              + checked
+              + "]");
         }
-        return true;
-      }
-    };
 
-    private Adapter.OnItemClickListener clickListener = new Adapter.OnItemClickListener() {
-      @Override
-      public void onItemClick(Adapter adapter, ViewHolder viewHolder, View view, int pos, long id) {
-        startActivity(new Intent(getContext(), DetailActivity.class));
-      }
+        @Override public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+          mode.getMenuInflater().inflate(R.menu.menu_main, menu);
+          return true;
+        }
 
-      @Override
-      public boolean onItemLongClick(Adapter adapter, ViewHolder viewHolder, View view, int pos,
-          long id) {
-        Toast.makeText(getContext(), "Long clicked: " + pos, Toast.LENGTH_SHORT).show();
-        return true;
-      }
-    };
+        @Override public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+          return false;
+        }
+
+        @Override public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+          return false;
+        }
+
+        @Override public void onDestroyActionMode(ActionMode mode) {
+
+        }
+      });
+      // adapter.setItemClickListener(clickListener);
+      // adapter.setItemSelectedListener(selectedListener);
+      recyclerView.setAdapter(adapter);
+      adapter.setOnItemClickListener(new ErabiAdapter.OnItemClickListener() {
+        @Override
+        public void onItemClick(ErabiAdapter adapter, ViewHolder viewHolder, View view, int pos,
+            long id) {
+          Log.d(TAG, "onItemClick() called with: "
+              + "adapter = ["
+              + adapter
+              + "], viewHolder = ["
+              + viewHolder
+              + "], view = ["
+              + view
+              + "], pos = ["
+              + pos
+              + "], id = ["
+              + id
+              + "]");
+        }
+      });
+    }
   }
 }

@@ -130,8 +130,10 @@ public class MainActivity extends AppCompatActivity {
   };
 
   private Adapter.OnItemSelectedListener selectedListener = new Adapter.OnItemSelectedListener() {
-    @Override public void onItemSelected(Adapter adapter, ViewHolder viewHolder, View view, int pos,
-        long id) {
+
+    @Override
+    public void onItemSelected(Adapter adapter, ViewHolder viewHolder, View view, int pos, long id,
+        boolean selected) {
       Toast.makeText(MainActivity.this, "Selected: " + pos, Toast.LENGTH_SHORT).show();
       if (actionMode != null) {
         actionMode.setTitle(adapter.getSelectedItemCount() + " items");

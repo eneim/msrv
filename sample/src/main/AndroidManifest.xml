@@ -27,7 +27,7 @@
 
     <activity-alias
         android:name="Launch"
-        android:targetActivity=".activity.MainActivity">
+        android:targetActivity=".activity.SimpleFragmentActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 
